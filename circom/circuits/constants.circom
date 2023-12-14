@@ -137,10 +137,10 @@ function NUM_CHALLENGES() { return 2; }
 function MIN_FRI_POW_RESPONSE() { return 16; }
 function CIRCUIT_DIGEST() {
   var cd[4];
-  cd[0] = 5836347848375857975;
-  cd[1] = 2598848834393367824;
-  cd[2] = 696366930841382787;
-  cd[3] = 15042019085796853171;
+  cd[0] = 8191195129154391911;
+  cd[1] = 88631295351925830;
+  cd[2] = 425357603386428990;
+  cd[3] = 11954345644783091838;
   return cd;
 }
 function SPONGE_RATE() { return 8; }
