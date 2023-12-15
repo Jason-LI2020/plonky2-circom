@@ -107,7 +107,7 @@ pub fn create_deposit_tx<F: RichField + Extendable<D>, C: GenericConfig<D, F = F
 
     let mut positions_tree = MerkleTree::<F, PoseidonHash>::new(positions.clone(), 0);
         // where [(); PoseidonHash::HASH_SIZE]:;
-    let amount = F::from_canonical_u64(3);
+    let amount = F::from_canonical_u64(5);
     let position_index: usize = 10;
 
 
@@ -314,7 +314,7 @@ mod tests {
         };
         let deposit_tx = create_deposit_tx::<F, C, D>().unwrap();
 
-        println!("deposit_tx: {:?}", deposit_tx);
+        // println!("deposit_tx: {:?}", deposit_tx);
 
         let (pi, vd, cd) = 
             make_deposit_proof::<F, C, D>(&final_config, deposit_tx).unwrap();
@@ -324,6 +324,7 @@ mod tests {
 
     #[test]
     fn test_resursive_single_proof() {
+        let time = std::time::Instant::now();
         let standard_config = CircuitConfig::standard_recursion_config();
 
         // A high-rate recursive proof, designed to be verifiable with fewer routed wires.
@@ -350,13 +351,16 @@ mod tests {
         };
         let deposit_tx = create_deposit_tx::<F, C, D>().unwrap();
 
-        println!("deposit_tx: {:?}", deposit_tx);
+        // println!("deposit_tx: {:?}", deposit_tx);
 
         let (pi, vd, cd) = 
-            make_deposit_proof::<F, C, D>(&high_rate_config, deposit_tx).unwrap();
+            make_deposit_proof::<F, C, D>(&standard_config, deposit_tx).unwrap();
+        println!("make_deposit_proof time: {:?}", time.elapsed());
+
 
         let (pi, vd, cd) =
-        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &final_config, None, true, true).unwrap();
+        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &standard_config, None, true, true).unwrap();
+        println!("recursive_proof time: {:?}", time.elapsed());
 
         verify_proof(pi, vd, cd).unwrap();
 
