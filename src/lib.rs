@@ -4,3 +4,5 @@ extern crate core;
 
 pub mod config;
 pub mod verifier;
+pub mod position;
+pub mod types;

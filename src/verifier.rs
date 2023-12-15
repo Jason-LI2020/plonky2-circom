@@ -27,7 +27,7 @@ pub fn encode_hex(bytes: &[u8]) -> String {
     s
 }
 
-fn recursive_proof<
+pub fn recursive_proof<
     F: RichField + Extendable<D>,
     C: GenericConfig<D, F = F>,
     InnerC: GenericConfig<D, F = F>,
