@@ -224,33 +224,33 @@ template GetChallenges() {
     // log(fri_query_indices[i]);
   }
 
-  component observe_batch_7 = HashNoPad_BN(SPONGE_RATE(), SPONGE_WIDTH());
-  if (NUM_FRI_QUERY_ROUND() - 7 > SPONGE_RATE()) {
-    for (var i = 0; i < SPONGE_RATE(); i++) {
-      observe_batch_7.in[i] <== observe_batch_6.out[i];
-    }
-    for (var i = 0; i < 4; i++) {
-      observe_batch_7.capacity[i] <== observe_batch_6.out[SPONGE_RATE() + i];
-    }
-    for (var i = 7 + SPONGE_RATE(); i < NUM_FRI_QUERY_ROUND() && i < 7 + 2 * SPONGE_RATE(); i++) {
-      mod_lde_size[i].x <== observe_batch_7.out[SPONGE_RATE() - 1 - (i - 7 - SPONGE_RATE())];
-      fri_query_indices[i] <== mod_lde_size[i].out;
-      // log(fri_query_indices[i]);
-    }
-  }
+//  component observe_batch_7 = HashNoPad_BN(SPONGE_RATE(), SPONGE_WIDTH());
+//  if (NUM_FRI_QUERY_ROUND() - 7 > SPONGE_RATE()) {
+//    for (var i = 0; i < SPONGE_RATE(); i++) {
+//      observe_batch_7.in[i] <== observe_batch_6.out[i];
+//   }
+//    for (var i = 0; i < 4; i++) {
+//     observe_batch_7.capacity[i] <== observe_batch_6.out[SPONGE_RATE() + i];
+//   }
+//   for (var i = 7 + SPONGE_RATE(); i < NUM_FRI_QUERY_ROUND() && i < 7 + 2 * SPONGE_RATE(); i++) {
+//     mod_lde_size[i].x <== observe_batch_7.out[SPONGE_RATE() - 1 - (i - 7 - SPONGE_RATE())];
+//     fri_query_indices[i] <== mod_lde_size[i].out;
+//     // log(fri_query_indices[i]);
+//   }
+//  }
 
-  component observe_batch_8 = HashNoPad_BN(SPONGE_RATE(), SPONGE_WIDTH());
-  if (NUM_FRI_QUERY_ROUND() - 7 > 2 * SPONGE_RATE()) {
-    for (var i = 0; i < SPONGE_RATE(); i++) {
-      observe_batch_8.in[i] <== observe_batch_7.out[i];
-    }
-    for (var i = 0; i < 4; i++) {
-      observe_batch_8.capacity[i] <== observe_batch_7.out[SPONGE_RATE() + i];
-    }
-    for (var i = 7 + 2 * SPONGE_RATE(); i < NUM_FRI_QUERY_ROUND() && i < 7 + 3 * SPONGE_RATE(); i++) {
-      mod_lde_size[i].x <== observe_batch_8.out[SPONGE_RATE() - 1 - (i - 7 - 2 * SPONGE_RATE())];
-      fri_query_indices[i] <== mod_lde_size[i].out;
+//  component observe_batch_8 = HashNoPad_BN(SPONGE_RATE(), SPONGE_WIDTH());
+//  if (NUM_FRI_QUERY_ROUND() - 7 > 2 * SPONGE_RATE()) {
+//    for (var i = 0; i < SPONGE_RATE(); i++) {
+//      observe_batch_8.in[i] <== observe_batch_7.out[i];
+//    }
+//    for (var i = 0; i < 4; i++) {
+//      observe_batch_8.capacity[i] <== observe_batch_7.out[SPONGE_RATE() + i];
+//    }
+//    for (var i = 7 + 2 * SPONGE_RATE(); i < NUM_FRI_QUERY_ROUND() && i < 7 + 3 * SPONGE_RATE(); i++) {
+//      mod_lde_size[i].x <== observe_batch_8.out[SPONGE_RATE() - 1 - (i - 7 - 2 * SPONGE_RATE())];
+//      fri_query_indices[i] <== mod_lde_size[i].out;
       // log(fri_query_indices[i]);
-    }
-  }
+//   }
+// }
 }

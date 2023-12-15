@@ -1140,14 +1140,36 @@ mod tests {
         type C = PoseidonGoldilocksConfig;
         type F = <C as GenericConfig<D>>::F;
         let standard_config = CircuitConfig::standard_recursion_config();
+        // A high-rate recursive proof, designed to be verifiable with fewer routed wires.
+        let high_rate_config = CircuitConfig {
+            fri_config: FriConfig {
+                rate_bits: 7,
+                proof_of_work_bits: 16,
+                num_query_rounds: 12,
+                ..standard_config.fri_config.clone()
+            },
+            ..standard_config
+        };
+        // A final proof, optimized for size.
+        let final_config = CircuitConfig {
+            num_routed_wires: 37,
+            fri_config: FriConfig {
+                rate_bits: 8,
+                cap_height: 0,
+                proof_of_work_bits: 20,
+                reduction_strategy: FriReductionStrategy::MinSize(None),
+                num_query_rounds: 10,
+            },
+            ..high_rate_config
+        };
 
         let (proof, vd, cd) = dummy_proof::<F, C, D>(&standard_config, 4_000, 4)?;
         let (proof, vd, cd) =
-            recursive_proof::<F, C, C, D>(proof, vd, cd, &standard_config, None, true, true)?;
+            recursive_proof::<F, C, C, D>(proof, vd, cd, &high_rate_config, None, true, true)?;
 
         type CBn128 = PoseidonBN128GoldilocksConfig;
         let (proof, vd, cd) =
-            recursive_proof::<F, CBn128, C, D>(proof, vd, cd, &standard_config, None, true, true)?;
+            recursive_proof::<F, CBn128, C, D>(proof, vd, cd, &final_config, None, true, true)?;
 
         let conf = generate_verifier_config(&proof)?;
         let (circom_constants, circom_gates) = generate_circom_verifier(&conf, &cd, &vd)?;
