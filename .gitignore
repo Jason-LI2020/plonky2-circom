@@ -14,5 +14,6 @@ circom/e2e_tests/plonky2_0.zkey
 circom/e2e_tests/plonky2.r1cs
 circom/e2e_tests/zkey0.out
 circom/e2e_tests/plonky2_js
+circom/test/data/
 circom/package-lock.json
 package-lock.json
