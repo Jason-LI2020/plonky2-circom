@@ -47,18 +47,18 @@ pub struct VDProof {
     pub root: HashOut<GoldilocksField>,
 }
 
-// #[derive(Debug, Clone)]
-// pub struct Transaction<F: RichField+ Extendable<D>, C: GenericConfig<D, F = F>> {
-//     pub transaction_type: usize,
-//     pub root_before: dyn GenericHashOut<F>,
-//     pub root_after: HashOut<F>,
-//     pub merkle_proof: MerkleProof<F, C::Hasher>,
-//     pub balance_before: F,
-//     pub position_index: usize,
-//     pub amount: F,
-//     pub position_tree_depth: usize,
-//     // pub vd_deposit_proof: VDProof,
-// }
+#[derive(Debug, Clone)]
+pub struct Transaction<F: RichField+ Extendable<D>, const D: usize> {
+    pub transaction_type: usize,
+    pub root_before: HashOut<F>,
+    pub root_after: HashOut<F>,
+    pub merkle_proof: MerkleProof<F, PoseidonHash>,
+    pub balance_before: F,
+    pub position_index: usize,
+    pub amount: F,
+    pub position_tree_depth: usize,
+    // pub vd_deposit_proof: VDProof,
+}
 
 
 // #[derive(Debug, Clone)]

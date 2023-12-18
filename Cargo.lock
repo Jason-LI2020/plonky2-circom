@@ -710,6 +710,7 @@ dependencies = [
  "plonky2",
  "plonky2_util",
  "poseidon-permutation",
+ "rand",
  "serde",
  "serde_json",
  "sha2",
