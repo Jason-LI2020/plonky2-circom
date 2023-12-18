@@ -369,6 +369,8 @@ mod tests {
 
     #[test]
     fn test_resursive_single_proof_to_circom() {
+        let time = std::time::Instant::now();
+
         let standard_config = CircuitConfig::standard_recursion_config();
 
         // A high-rate recursive proof, designed to be verifiable with fewer routed wires.
@@ -398,10 +400,13 @@ mod tests {
         // println!("deposit_tx: {:?}", deposit_tx);
 
         let (pi, vd, cd) = 
-            make_deposit_proof::<F, C, D>(&high_rate_config, deposit_tx).unwrap();
+            make_deposit_proof::<F, C, D>(&standard_config, deposit_tx).unwrap();
+        
+        println!("make_deposit_proof time: {:?}", time.elapsed());
 
         let (pi, vd, cd) =
-        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &final_config, None, true, true).unwrap();
+        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &standard_config, None, true, true).unwrap();
+        println!("recursive_proof time: {:?}", time.elapsed());
 
         // verify_proof(pi, vd, cd).unwrap();
 
