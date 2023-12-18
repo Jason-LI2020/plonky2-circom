@@ -405,7 +405,7 @@ mod tests {
         println!("make_deposit_proof time: {:?}", time.elapsed());
 
         let (pi, vd, cd) =
-        recursive_proof::<F, C, C, D>(pi, vd, cd, &standard_config, None, true, true).unwrap();
+        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &final_config, None, true, true).unwrap();
         println!("recursive_proof time: {:?}", time.elapsed());
 
         // verify_proof(pi, vd, cd).unwrap();
