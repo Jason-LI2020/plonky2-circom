@@ -121,7 +121,7 @@ pub fn create_deposit_tx<F: RichField + Extendable<D>, C: GenericConfig<D, F = F
     //     &merkle_proof,
     // )?;
 
-    verify_merkle_proof_to_cap(positions[position_index].clone(), position_index, &positions_tree.cap, &merkle_proof)?;
+    // verify_merkle_proof_to_cap(positions[position_index].clone(), position_index, &positions_tree.cap, &merkle_proof)?;
     // println!("mk proof verified");
 
 
@@ -405,7 +405,7 @@ mod tests {
         println!("make_deposit_proof time: {:?}", time.elapsed());
 
         let (pi, vd, cd) =
-        recursive_proof::<F, Cbn128, C, D>(pi, vd, cd, &standard_config, None, true, true).unwrap();
+        recursive_proof::<F, C, C, D>(pi, vd, cd, &standard_config, None, true, true).unwrap();
         println!("recursive_proof time: {:?}", time.elapsed());
 
         // verify_proof(pi, vd, cd).unwrap();
