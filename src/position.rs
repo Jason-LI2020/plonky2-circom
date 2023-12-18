@@ -400,7 +400,7 @@ mod tests {
         // println!("deposit_tx: {:?}", deposit_tx);
 
         let (pi, vd, cd) = 
-            make_deposit_proof::<F, C, D>(&standard_config, deposit_tx).unwrap();
+            make_deposit_proof::<F, C, D>(&high_rate_config, deposit_tx).unwrap();
         
         println!("make_deposit_proof time: {:?}", time.elapsed());
 
